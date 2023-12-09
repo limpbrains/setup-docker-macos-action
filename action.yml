@@ -13,6 +13,10 @@ inputs:
     description: "Colima version. Defaults to the latest version."
     required: false
     default: "latest"
+  colima-params:
+    description: "Additional parameters to pass to Colima"
+    required: false
+    default: ""
 outputs:
   colima-version:
     value: ${{ steps.colima-version.outputs.version }}
@@ -107,7 +111,7 @@ runs:
     - name: Start Colima
       run: |
         echo "::group::Starting Colima"
-        colima start
+        colima start ${{ inputs.colima-params }}
         echo "::endgroup::"
       shell: bash
     - id: docker-client-version
